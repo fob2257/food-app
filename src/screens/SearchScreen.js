@@ -4,10 +4,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import SearchBar from '../components/SearchBar';
 
 const SearchScreen = () => {
+  const onSearchSubmit = (term = '') => {
+    console.log('search term was submitted!');
+  };
+
   return (
     <View style={styles.container}>
-      <SearchBar />
-      <Text>Open up App.js to start working on your app!</Text>
+      <SearchBar onSubmit={onSearchSubmit} />
+      <Text>Search Screen</Text>
     </View>
   );
 };
