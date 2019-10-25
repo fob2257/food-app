@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
 import { Feather } from '@expo/vector-icons'
 
 const SearchBar = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+
   return (
     <View style={styles.backgroundStyle}>
       <Feather name='search' style={styles.iconStyle} />
       <TextInput
         placeholder='Search'
         style={styles.inputStyle}
+        value={searchTerm}
+        onChangeText={val => setSearchTerm(val)}
+        autoCorrect={false}
       />
     </View>
   );
