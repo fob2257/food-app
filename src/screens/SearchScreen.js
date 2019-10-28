@@ -10,7 +10,22 @@ const SearchScreen = () => {
   const { searchApi, results, errorMsg } = useResults();
 
   const filterByPrice = price =>
-    results.filter(result => result.price === price);
+    results.filter(result => {
+      const resultPrice = result.price || '$$';
+      return resultPrice === price;
+    });
+
+  // console.log(results.map(({
+  //   name,
+  //   price,
+  //   image_url,
+  //   categories,
+  // }) => ({
+  //   name,
+  //   price,
+  //   image_url,
+  //   categories,
+  // })));
 
   return (
     <View>

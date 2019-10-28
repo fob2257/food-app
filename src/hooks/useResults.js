@@ -25,7 +25,7 @@ const useResults = () => {
   };
 
   useEffect(() => {
-    const foods = ['Japanese', 'Chinese', 'Italian', 'Mexican', 'Burgers', 'Chicken', 'Seafood', 'Tacos'];
+    const foods = ['Japanese', 'Chinese', 'Italian', 'Mexican', 'Burgers', 'Seafood', 'Tacos'];
     const defaultTerm = foods[Math.floor(Math.random() * foods.length)];
     // const actualHr = new Date().getHours();
     // const defaultTerm = 4 <= actualHr && actualHr < 12 ? 'Breakfast'
