@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import yelp from '../api/yelp';
 
@@ -12,12 +12,12 @@ const useResults = () => {
         params: {
           term,
           limit: 50,
-          location: 'Hermosillo, Sonora',
+          location: 'Hermosillo, Sonora, Mexico',
         },
       });
 
-      const { data: { business } } = response;
-      setResults(business);
+      const { data: { businesses } } = response;
+      setResults(businesses);
     } catch (error) {
       console.error(error);
       setErrorMsg('Something went wrong');
@@ -25,10 +25,17 @@ const useResults = () => {
   };
 
   useEffect(() => {
-    searchApi('Tacos');
+    const foods = ['Japanese', 'Chinese', 'Italian', 'Mexican', 'Burgers', 'Chicken', 'Seafood', 'Tacos'];
+    const defaultTerm = foods[Math.floor(Math.random() * foods.length)];
+    // const actualHr = new Date().getHours();
+    // const defaultTerm = 4 <= actualHr && actualHr < 12 ? 'Breakfast'
+    //   : 12 <= actualHr && actualHr < 19 ? 'Lunch'
+    //     : 'Dinner';
+
+    searchApi(defaultTerm);
   }, []);
 
-  return [searchApi, results, errorMsg];
+  return { searchApi, results, errorMsg };
 };
 
 export default useResults;
