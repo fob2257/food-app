@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import useResults from '../hooks/useResults';
+
+import Context from '../context';
+import { setUserPosition } from '../context/actions';
 
 import SearchBar from '../components/SearchBar';
 import ResultsList from '../components/ResultsList';
 
 const SearchScreen = () => {
+  const { dispatch } = useContext(Context);
   const { fetchResults, results, errorMsg } = useResults();
 
   const filterByPrice = price =>
@@ -14,6 +18,12 @@ const SearchScreen = () => {
       const resultPrice = result.price || '$$';
       return resultPrice === price;
     });
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
+      dispatch(setUserPosition({ latitude, longitude }));
+    });
+  }, []);
 
   return (
     <View style={styles.containerStyle}>

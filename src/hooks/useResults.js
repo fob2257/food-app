@@ -1,19 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import yelp from '../api/yelp';
+
+import Context from '../context';
 
 const useResults = () => {
   const [results, setResults] = useState([]);
   const [errorMsg, setErrorMsg] = useState('');
+  const { state } = useContext(Context);
 
   const fetchResults = async (term = '') => {
     try {
+      const locationData = state.userPosition ? { ...state.userPosition }
+        : { location: 'San Francisco, California' };
+
       const response = await yelp.get('/search', {
         params: {
-          term,
+          term: !!term ? term : undefined,
           limit: 50,
-          // location: 'Hermosillo, Sonora, Mexico',
-          location: 'Portland, Oregon',
+          radius: 20000,
+          ...locationData,
         },
       });
 
@@ -26,14 +32,10 @@ const useResults = () => {
   };
 
   useEffect(() => {
-    const foods = ['Japanese', 'Chinese', 'Italian', 'Mexican', 'Burgers', 'Seafood', 'Tacos'];
-    const defaultTerm = foods[Math.floor(Math.random() * foods.length)];
-    // const actualHr = new Date().getHours();
-    // const defaultTerm = 4 <= actualHr && actualHr < 12 ? 'Breakfast'
-    //   : 12 <= actualHr && actualHr < 19 ? 'Lunch'
-    //     : 'Dinner';
+    // const foods = ['Japanese', 'Chinese', 'Italian', 'Mexican', 'Burgers', 'Seafood', 'Tacos'];
+    // const defaultTerm = foods[Math.floor(Math.random() * foods.length)];
 
-    fetchResults(defaultTerm);
+    fetchResults();
   }, []);
 
   return { fetchResults, results, errorMsg };

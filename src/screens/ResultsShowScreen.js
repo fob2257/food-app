@@ -7,10 +7,10 @@ const ResultsShowScreen = ({ navigation }) => {
   const id = navigation.getParam('id');
   const { result, errorMsg } = useResult(id);
 
-  useEffect(() => {
-    console.log(result);
+  // useEffect(() => {
+  //   console.log(result);
 
-  }, [result]);
+  // }, [result]);
 
   return result ? (
     <View>

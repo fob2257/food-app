@@ -1,5 +1,8 @@
+import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+
+import { ContextProvider } from './src/context';
 
 import SearchScreen from './src/screens/SearchScreen';
 import ResultsShowScreen from './src/screens/ResultsShowScreen';
@@ -14,4 +17,10 @@ const navigator = createStackNavigator({
   },
 });
 
-export default createAppContainer(navigator);
+const App = createAppContainer(navigator);
+
+export default () => (
+  <ContextProvider>
+    <App />
+  </ContextProvider>
+);
