@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import useResults from '../hooks/useResults';
 
@@ -15,20 +15,8 @@ const SearchScreen = () => {
       return resultPrice === price;
     });
 
-  // console.log(results.map(({
-  //   name,
-  //   price,
-  //   image_url,
-  //   categories,
-  // }) => ({
-  //   name,
-  //   price,
-  //   image_url,
-  //   categories,
-  // })));
-
   return (
-    <View>
+    <View style={styles.containerStyle}>
       <SearchBar onSubmit={searchApi} />
       <Text>Search Screen</Text>
       <Text>{`Found ${results.length} results!`}</Text>
@@ -36,22 +24,30 @@ const SearchScreen = () => {
         errorMsg ? <Text>{errorMsg}</Text>
           : null
       }
-      <ResultsList
-        title='Cost Effective'
-        results={filterByPrice('$')}
-      />
-      <ResultsList
-        title='Bit Pricier'
-        results={filterByPrice('$$')}
-      />
-      <ResultsList
-        title='Big Spender'
-        results={[...filterByPrice('$$$'), ...filterByPrice('$$$$')]}
-      />
+      <ScrollView>
+        <ResultsList
+          title='Cost Effective'
+          results={filterByPrice('$')}
+        />
+        <ResultsList
+          title='Bit Pricier'
+          results={filterByPrice('$$')}
+        />
+        <ResultsList
+          title='Big Spender'
+          results={[...filterByPrice('$$$'), ...filterByPrice('$$$$')]}
+        />
+      </ScrollView>
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  containerStyle: {
+    // borderColor: 'red',
+    // borderWidth: 10,
+    flex: 1,
+  },
+});
 
 export default SearchScreen;

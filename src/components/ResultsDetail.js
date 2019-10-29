@@ -6,7 +6,7 @@ const ResultsDetail = ({ result }) => {
     : 'https://1080motion.com/wp-content/uploads/2018/06/NoImageFound.jpg.png';
 
   return (
-    <View>
+    <View style={styles.containerStyle}>
       <Image
         style={styles.imageStyle}
         source={{ uri }}
@@ -24,10 +24,14 @@ const styles = StyleSheet.create({
     width: 250,
     height: 120,
     borderRadius: 4,
+    marginBottom: 5,
   },
   nameStyle: {
     fontWeight: 'bold',
     fontSize: 14,
+  },
+  containerStyle: {
+    marginLeft: 15,
   },
 });
 

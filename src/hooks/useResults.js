@@ -12,7 +12,8 @@ const useResults = () => {
         params: {
           term,
           limit: 50,
-          location: 'Hermosillo, Sonora, Mexico',
+          // location: 'Hermosillo, Sonora, Mexico',
+          location: 'Portland, Oregon',
         },
       });
 
