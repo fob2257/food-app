@@ -7,7 +7,7 @@ import SearchBar from '../components/SearchBar';
 import ResultsList from '../components/ResultsList';
 
 const SearchScreen = () => {
-  const { searchApi, results, errorMsg } = useResults();
+  const { fetchResults, results, errorMsg } = useResults();
 
   const filterByPrice = price =>
     results.filter(result => {
@@ -17,7 +17,7 @@ const SearchScreen = () => {
 
   return (
     <View style={styles.containerStyle}>
-      <SearchBar onSubmit={searchApi} />
+      <SearchBar onSubmit={fetchResults} />
       <Text>Search Screen</Text>
       <Text>{`Found ${results.length} results!`}</Text>
       {

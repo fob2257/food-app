@@ -5,22 +5,23 @@ import { withNavigation } from 'react-navigation';
 import ResultsDetail from './ResultsDetail';
 
 const ResultsList = ({ navigation, title, results }) => {
-  return (
+
+  return results.length ? (
     <View>
       <Text style={styles.titleStyle}>{title}</Text>
       <FlatList
         data={results}
         keyExtractor={result => result.id}
         renderItem={({ item, index }) =>
-          // <TouchableOpacity onPress={() => navigation.navigate('ResultsShow', { id: item.id })}>
-          <ResultsDetail result={item} />
-          // </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('ResultsShow', { id: item.id })}>
+            <ResultsDetail result={item} />
+          </TouchableOpacity>
         }
         showsHorizontalScrollIndicator={false}
         horizontal
       />
     </View>
-  );
+  ) : null;
 };
 
 const styles = StyleSheet.create({

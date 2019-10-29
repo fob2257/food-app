@@ -6,7 +6,7 @@ const useResults = () => {
   const [results, setResults] = useState([]);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const searchApi = async (term = '') => {
+  const fetchResults = async (term = '') => {
     try {
       const response = await yelp.get('/search', {
         params: {
@@ -33,10 +33,10 @@ const useResults = () => {
     //   : 12 <= actualHr && actualHr < 19 ? 'Lunch'
     //     : 'Dinner';
 
-    searchApi(defaultTerm);
+    fetchResults(defaultTerm);
   }, []);
 
-  return { searchApi, results, errorMsg };
+  return { fetchResults, results, errorMsg };
 };
 
 export default useResults;
