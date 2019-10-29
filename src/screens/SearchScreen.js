@@ -18,7 +18,6 @@ const SearchScreen = () => {
   return (
     <View style={styles.containerStyle}>
       <SearchBar onSubmit={fetchResults} />
-      <Text>Search Screen</Text>
       <Text>{`Found ${results.length} results!`}</Text>
       {
         errorMsg ? <Text>{errorMsg}</Text>
